@@ -19,9 +19,11 @@ const eSchema = mongoose.Schema({
         required: false
     }
 });
-// Export Produto model
-const eletrodo = module.exports = mongoose.model('Eletrodo', eSchema);
+
+const eletrodo =  mongoose.model('Eletrodo', eSchema);
+module.exports = eletrodo;
+
 
 //module.exports.get = function (callback, limit) {
- //   Produto.find(callback).limit(limit);
+//    eletrodo.find(callback).limit(limit);
 //}
