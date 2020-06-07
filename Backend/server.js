@@ -8,6 +8,8 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 8080;
 
+const routes = require("./routes/routes");
+
 const uri = process.env.ATLAS_URI;
 
 app.use(cors());
@@ -23,6 +25,8 @@ if(!db)
 else
     console.log("Db connected successfully")
 
+
+    app.use('/soil', routes);
 
 app.listen(port, function () {
     console.log("Running Server on port: " + port);
