@@ -15,7 +15,7 @@ const eSchema = mongoose.Schema({
         required: true
     },
     coordenadas: {
-        type: Strinh,
+        type: String,
         required: false
     }
 });
