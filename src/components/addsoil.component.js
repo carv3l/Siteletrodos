@@ -51,7 +51,7 @@ export default class CreateExercise extends Component {
 
   onChangeResistividade(e) {
     this.setState({
-      onResistividade: e.target.value
+      resistividade: e.target.value
     })
   }
 
@@ -64,6 +64,10 @@ export default class CreateExercise extends Component {
   onSubmit(e) {
     e.preventDefault();
 
+    if (this.state.coordenadas == null){
+      this.state.coordenadas = 0;
+    }
+
     const datasoil = {
       idsolo: this.state.idsolo,
       solo: this.state.solo,
@@ -73,10 +77,10 @@ export default class CreateExercise extends Component {
 
     console.log(datasoil);
 
-    axios.post('http://localhost:3000/soil/add', datasoil)
+    axios.post('http://localhost:8080/soil/add', datasoil)
       .then(res => console.log(res.data));
 
-    window.location = '/';
+    //window.location = '/';
   }
 
   render() {
@@ -122,7 +126,7 @@ export default class CreateExercise extends Component {
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Add Soil" className="btn btn-primary" />
+          <input type="submit" value="Add" className="btn btn-primary" />
         </div>
       </form>
     </div>

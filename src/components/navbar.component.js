@@ -6,7 +6,7 @@ export default class Navbar extends Component {
   render() {
     return (
       <nav className="navbar navbar-inverse bg-inverse navbar-expand-lg">
-        <div class="container-fluid">
+        <div className="container-fluid">
         <Link to="/" className="navbar-brand">ELETRODOS</Link>
         <div className="collpase navbar-collapse">
         <ul className="navbar-nav nav">
