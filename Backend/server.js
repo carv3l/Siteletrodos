@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+//const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
@@ -7,27 +7,28 @@ require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 8080;
+app.use(cors());
 
-const routes = require("./routes/routes");
 
 const uri = process.env.ATLAS_URI;
 
-app.use(cors());
 
+
+//app.use(bodyParser.json());
 app.use(express.json());
 
 
-mongoose.connect(uri, { useNewUrlParser: true});
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true});
 var db = mongoose.connection;
 
-if(!db)
-    console.log("Error connecting db")
-else
-    console.log("Db connected successfully")
+db.once('open', () => {
+    console.log("MongoDB database connection established successfully");
+  })
+  const routes = require("./routes/routes");
 
-
+  
     app.use('/soil', routes);
 
-app.listen(port, function () {
-    console.log("Running Server on port: " + port);
-});
+    app.listen(port, () => {
+        console.log(`Server is running on port: ${port}`);
+    });
