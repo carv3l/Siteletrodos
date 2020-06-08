@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
+//import DatePicker from 'react-datepicker';
+//import "react-datepicker/dist/react-datepicker.css";
 
 export default class CreateExercise extends Component {
   constructor(props) {
@@ -21,21 +21,21 @@ export default class CreateExercise extends Component {
     }
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:5000/users/')
-      .then(response => {
-        if (response.data.length > 0) {
-          this.setState({
-            users: response.data.map(user => user.username),
-            username: response.data[0].username
-          })
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+  // componentDidMount() {
+  //   axios.get('http://localhost:5000/users/')
+  //     .then(response => {
+  //       if (response.data.length > 0) {
+  //         this.setState({
+  //           users: response.data.map(user => user.username),
+  //           username: response.data[0].username
+  //         })
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     })
 
-  }
+  // }
 
   onChangeIdSolo(e) {
     this.setState({
@@ -71,9 +71,9 @@ export default class CreateExercise extends Component {
       coordenadas: this.state.coordenadas
     }
 
-    console.log(exercise);
+    console.log(datasoil);
 
-    axios.post('http://localhost:5000/exercises/add', datasoil)
+    axios.post('http://localhost:3000/soil/add', datasoil)
       .then(res => console.log(res.data));
 
     window.location = '/';
@@ -86,13 +86,12 @@ export default class CreateExercise extends Component {
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Id Solo: </label>
-          <select ref="userInput"
+          <input  type="text"
               required
               className="form-control"
               value={this.state.idsolo}
-              onChange={this.onChangeIdSolo}>
-             
-          </select>
+              onChange={this.onChangeIdSolo}
+              />
         </div>
         <div className="form-group"> 
           <label>Solo: </label>
