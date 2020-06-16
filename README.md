@@ -1,8 +1,15 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+<<<<<<< HEAD
 ## Available Scripts
 
 In the project directory, you can run:
+=======
+## Run in separate console
+
+### `nodemon server`
+Inside the backend folder
+>>>>>>> 3acc2accef591483190f3a7d7af07ea98737e7ac
 
 ### `npm start`
 
@@ -12,6 +19,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
+<<<<<<< HEAD
+=======
+## Available Scripts
+
+In the project directory, you can run:
+
+>>>>>>> 3acc2accef591483190f3a7d7af07ea98737e7ac
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br />
