@@ -2,10 +2,9 @@ const router = require('express').Router();
 let Eletrodo = require('../models/modelEletrodo');
 
 router.get('/', function (req, res) {
-    res.json({
-        status: 'API Its Working',
-        message: 'Welcome to RESTHub crafted with love!',
-    });
+      Eletrodo.find()
+    .then(eletrodo => res.json(eletrodo))
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
    
