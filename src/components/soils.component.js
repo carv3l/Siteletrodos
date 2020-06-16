@@ -17,8 +17,8 @@ const Eletrodo = solo => (
 )
 
 export default class ExercisesList extends Component {
-  constructor(props) {
-    super(props);
+  constructor(solo) {
+    super(solo);
 
     this.deleteExercise = this.deleteExercise.bind(this)
 
@@ -30,7 +30,6 @@ export default class ExercisesList extends Component {
     axios.get('http://localhost:8080/soil/')
       .then(response => {
         this.setState({ eletrodos: response.data })
-
       })
       .catch((error) => {
         console.log(error);
@@ -41,7 +40,6 @@ export default class ExercisesList extends Component {
 
     axios.delete('http://localhost:8080/exercises/'+id)
       .then(response => { console.log(response.data)});
-
     this.setState({
       eletrodos: this.state.eletrodos.filter(el => el._id !== id)
 

@@ -5,8 +5,6 @@ router.get('/', function (req, res) {
       Eletrodo.find()
     .then(eletrodo => res.json(eletrodo))
     .catch(err => res.status(400).json('Error: ' + err));
-
-    
 });
 
    
@@ -25,7 +23,7 @@ router.route('/add').post((req, res) => {
     });
   
     newsoil.save()
-      .then(() => res.json('User added!'))
+      .then(() => res.json('Soil added!'))
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
