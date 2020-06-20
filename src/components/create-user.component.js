@@ -78,13 +78,31 @@ export default class CreateUser extends Component {
     var v2 = operations.potencial2(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
     var v3 = operations.potencial3(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
     var v231 = operations.ddp23(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
+
+    var rsolo = operations.resolo(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
+
+    var rsolo1 = v231/ dados.amperage;
+
+    var v23 = v2-v3;
+
+    var reletricaarray = operations.reletrica(dados.amperage,dados.spacing,dados.depth,dados.resistivity,rsolo);
+
+    var reletrica = reletricaarray[0];
+   // var reletrica1 = reletricaarray[1];
+
     
      
     
-        console.log("V2:"+v2);
-        console.log("V3:"+v3);
-        console.log("V23:"+v231);
+        // console.log("V2:"+v2);
+        // console.log("V3:"+v3);
+        // console.log("V23:"+v231);
+        // console.log("V231"+v23);
+        // console.log("ReSOlo: "+rsolo);
+        // console.log("Resolo1: "+rsolo1);
 
+        alert("V2: "+v2+"\n"+"V3: " + v3+"\n"+"V23: "+v231+
+        "\n"+"V231: "+v23+"\n"+"Resolo: "+rsolo+"\n"+"Resolo1: "+rsolo1+
+        "\n"+"Reletrica: "+reletrica+"\n");
 
 
 
