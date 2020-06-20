@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+var operations = require('./Operations');
 export default class CreateUser extends Component {
   constructor(props) {
     super(props);
@@ -17,45 +17,6 @@ export default class CreateUser extends Component {
       depth:'',
       resistivity:'',
       resistiv: []
-    }
-
-
-    function potencial2(amperage,spacing,depth,resistivity) {
-      var powspacing = Math.pow(spacing,2);
-      var powdepth = Math.pow(depth,2);      
-      var ct0 = (resistivity*amperage)/(4*Math.PI);
-      var v2_ct1 = 1/spacing;
-      var v2_ct2 = 1/(Math.sqrt(powspacing+(2*powdepth)));
-      var v2_ct3 = 1/(2*spacing);
-      var v2_ct4 = 1/(Math.sqrt(2*powspacing+(2*powdepth)));
-      var v2 = ct0 *(v2_ct1+v2_ct2-v2_ct3-v2_ct4);
-      
-      return v2;
-    }
-
-    function potencial3(amperage,spacing,depth,resistivity) {
-      var powspacing = Math.pow(spacing,2);
-      var powdepth = Math.pow(depth,2);      
-      var ct0 = (resistivity*amperage)/(4*Math.PI);
-      var v3_ct1 = 1/2*spacing;
-      var v3_ct2 = 1/(Math.sqrt(2*powspacing+(2*powdepth)));
-      var v3_ct3 = 1/(spacing);
-      var v3_ct4 = 1/(Math.sqrt(2*powspacing+(powdepth))); 
-      var v3 = ct0 *(v3_ct1+v3_ct2-v3_ct3-v3_ct4);
-      return v3;
-    }
-
-
-    function ddp23(amperage,spacing,depth,resistivity) {
-      var powspacing = Math.pow(spacing,2);
-      var powdepth = Math.pow(depth,2);      
-      var ct0 = (resistivity*amperage)/(4*Math.PI);
-      var v_ct1 = 1/spacing;
-      var v_ct2 = 2/(Math.sqrt(powspacing+(2*powdepth)));
-      var v_ct3 = 2/(Math.sqrt(2*powspacing+(2*powdepth)));
-      var v231 = ct0*(v_ct1 + v_ct2 - v_ct3);
-
-      return [v231];
     }
 
     
@@ -113,19 +74,23 @@ export default class CreateUser extends Component {
 
     console.log(dados);
 
-
-}
-
   
-var v2 = CreateUser.potencial2(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
-var v3 = CreateUser.potencial3(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
-var v231 = CreateUser.ddp231(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
+    var v2 = operations.potencial2(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
+    var v3 = operations.potencial3(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
+    var v231 = operations.ddp23(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
+    
+     
+    
+        console.log("V2:"+v2);
+        console.log("V3:"+v3);
+        console.log("V23:"+v231);
 
- 
 
-    console.log("V2:"+v2);
-    console.log("V3:"+v3);
-    console.log("V23:"+v231);
+
+
+
+
+
 
 
 
@@ -191,3 +156,5 @@ var v231 = CreateUser.ddp231(dados.amperage,dados.spacing,dados.depth,dados.resi
  
 
 }
+
+
