@@ -29,7 +29,7 @@ export default class CreateUser extends Component {
         .then(response => {
           if (response.data.length > 0) {
             this.setState({
-              resistiv: response.data.map(resist => resist.resistividade),
+              resistiv: response.data.map(resist => resist.resistividade+" - "+resist.solo+" - "+resist.idsolo),
             })
           }
         })
@@ -69,10 +69,11 @@ export default class CreateUser extends Component {
       amperage: this.state.amperage,
       spacing: this.state.spacing,
       depth: this.state.depth,
-      resistivity: this.state.resistivity
+      resistivity: this.state.resistivity.split('-')[0]
     }
 
     console.log(dados);
+    
 
   
     var v2 = operations.potencial2(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
