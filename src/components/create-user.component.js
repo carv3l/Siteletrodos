@@ -3,8 +3,8 @@ import axios from 'axios';
 var operations = require('./Operations');
 
 
-var uri_get ="http://localhost:8080/soil/";
-//var uri_get ="https://eletrodos.herokuapp.com/soil/";
+//var uri_get ="http://localhost:8080/soil/";
+var uri_get ="https://eletrodos.herokuapp.com/soil/";
 
 
 
