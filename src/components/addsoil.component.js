@@ -3,6 +3,12 @@ import axios from 'axios';
 //import DatePicker from 'react-datepicker';
 //import "react-datepicker/dist/react-datepicker.css";
 
+
+
+
+var uri_post ="http://localhost:8080/soil/add";
+//var uri_post ="https://eletrodos.herokuapp.com/soil/add";
+
 export default class CreateExercise extends Component {
   constructor(props) {
     super(props);
@@ -77,7 +83,7 @@ export default class CreateExercise extends Component {
 
     console.log(datasoil);
 
-    axios.post('http://localhost:8080/soil/add', datasoil)
+    axios.post(uri_post, datasoil)
       .then(res => console.log(res.data));
 
     //window.location = '/';

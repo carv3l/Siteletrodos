@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 var operations = require('./Operations');
+
+
+var uri_get ="http://localhost:8080/soil/";
+//var uri_get ="https://eletrodos.herokuapp.com/soil/";
+
+
+
 export default class CreateUser extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +32,7 @@ export default class CreateUser extends Component {
   
 
   componentDidMount() {
-      axios.get('http://localhost:8080/soil/')
+      axios.get(uri_get)
         .then(response => {
           if (response.data.length > 0) {
             this.setState({
@@ -89,6 +96,8 @@ export default class CreateUser extends Component {
     var reletricaarray = operations.reletrica(dados.amperage,dados.spacing,dados.depth,dados.resistivity,rsolo);
 
     var reletrica = reletricaarray[0];
+
+    var depth_required = operations.depth(dados.amperage,dados.spacing,dados.resistivity,reletrica);
    // var reletrica1 = reletricaarray[1];
 
     
@@ -103,7 +112,10 @@ export default class CreateUser extends Component {
 
         alert("V2: "+v2+"\n"+"V3: " + v3+"\n"+"V23: "+v231+
         "\n"+"V231: "+v23+"\n"+"Resolo: "+rsolo+"\n"+"Resolo1: "+rsolo1+
-        "\n"+"Reletrica: "+reletrica+"\n");
+        "\n"+"Reletrica: "+reletrica+"\n"+
+        "\n"+"Profundidade: "+depth_required+"\n");
+
+
 
 
 

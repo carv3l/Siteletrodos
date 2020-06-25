@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 
+
+var uri_get ="http://localhost:8080/soil/";
+
+//var uri_get ="https://eletrodos.herokuapp.com/soil/";
+
 const Eletrodo = solo => (
   <tr>
     <td>{solo.eletrodos.idsolo}</td>
@@ -27,7 +32,7 @@ export default class ExercisesList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8080/soil/')
+    axios.get(uri_get)
       .then(response => {
         this.setState({ eletrodos: response.data })
       })
