@@ -11,7 +11,7 @@ app.use(cors());
 
 
 //const uri = process.env.ATLAS_URI;
-const uri = 'ATLAS_URI=mongodb+srv://root:toor@cluster0-6wgtv.gcp.mongodb.net/Eletrodos?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://root:toor@cluster0-6wgtv.gcp.mongodb.net/Eletrodos?retryWrites=true&w=majority';
 
 
 //app.use(bodyParser.json());
