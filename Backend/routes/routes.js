@@ -4,7 +4,7 @@ let Eletrodo = require('../models/modelEletrodo');
 router.get('/', function (req, res) {
       Eletrodo.find()
     .then(eletrodo => res.json(eletrodo))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .catch(err => res.status(400).json('Erro: ' + err));
 });
 
    
