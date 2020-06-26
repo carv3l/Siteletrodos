@@ -2,7 +2,9 @@ const router = require('express').Router();
 let Eletrodo = require('../models/modelEletrodo');
 
 router.get('/', function (req, res) {
+  console.log("Reached before eletrodo find");
       Eletrodo.find()
+      console.log("Reached after eletrodo find");
     .then(eletrodo => res.json(eletrodo))
     .catch(err => res.status(400).json('Erro: ' + err));
 });
