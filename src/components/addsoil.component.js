@@ -86,6 +86,13 @@ export default class CreateExercise extends Component {
     axios.post(uri_post, datasoil)
       .then(res => console.log(res.data));
 
+      this.state = {
+        idsolo: '',
+        solo: '',
+        resistividade: '',
+        coordenadas: '',
+      }
+
     //window.location = '/';
   }
 
