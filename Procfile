@@ -1,2 +1,3 @@
 web: npm start
-web: nodemon server
+web: sh -c 'cd ./Backend/ && nodemon server'
+web: cd Backend && nodemon server
