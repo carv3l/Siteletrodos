@@ -2,6 +2,7 @@ const express = require('express');
 //const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const path = require('path');
 
 require('dotenv').config();
 
@@ -15,7 +16,15 @@ const uri = 'mongodb+srv://root:toor@cluster0-6wgtv.gcp.mongodb.net/Eletrodos?re
 
 
 //app.use(bodyParser.json());
-app.use(express.json());
+//app.use(express.json());
+app.use(express.static(path.join(__dirname, 'build')));
+
+
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 
 
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true});

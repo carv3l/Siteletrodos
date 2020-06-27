@@ -1,6 +1,9 @@
 const router = require('express').Router();
 let Eletrodo = require('../models/modelEletrodo');
 
+
+
+
 router.get('/', function (req, res) {
   console.log("Reached before eletrodo find");
       Eletrodo.find()
