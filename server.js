@@ -16,16 +16,8 @@ const uri = 'mongodb+srv://root:toor@cluster0-6wgtv.gcp.mongodb.net/Eletrodos?re
 
 
 //app.use(bodyParser.json());
-//app.use(express.json());
-app.use(express.static(path.join(__dirname, 'build')));
-
-
-
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-
+app.use(express.json());
+//app.use(express.static(path.join(__dirname, 'build')));
 
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true});
 var db = mongoose.connection;

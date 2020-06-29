@@ -73,11 +73,25 @@ potencial2: function(amperage,spacing,depth,resistivity) {
       return [cfinal,altn];
     },
 
-    depth: function(amperage,spacing,reletrica) {
-      var ct0 = ((4*Math.PI*spacing*reletrica*spacing)+(4*Math.PI*spacing*reletrica)-1+spacing-2);
-      var ct1 = (amperage);
-      var cfinal = ct0/ct1;
-      return cfinal 
+    depth: function(amperage,spacing,resistivity,rsolo) {
+      var rsolol = 0;
+      var i = 0
+      do {   
+        i=((i*10+0.1*10)/10)
+        console.log("i:",i);
+        var powspacing = Math.pow(spacing,2);
+        var dpowspacing = Math.pow(2*spacing,2);
+        var dpowdepth = Math.pow(2*i,2);     
+        var ct0 = (resistivity)/(4*Math.PI);
+        var v_ct1 = 1/spacing;
+        var v_ct2 = 2/(Math.sqrt(powspacing+(dpowdepth)));
+        var v_ct3 = 2/(Math.sqrt(dpowspacing+dpowdepth));
+        rsolol = ct0*(v_ct1 + v_ct2 - v_ct3);
+        console.log("cfinal:",rsolol);
+        console.log("cfinal:",rsolo);
+    }  while(rsolol != rsolo);
+  return i; 
+  
     }
 
 
