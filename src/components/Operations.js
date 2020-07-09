@@ -1,7 +1,7 @@
 
   module.exports ={
     
-potencial2: function(amperage,spacing,depth,resistivity) {
+/* potencial2: function(amperage,spacing,depth,resistivity) {
   var powspacing = Math.pow(spacing,2);
   var dpowspacing = Math.pow(2*spacing,2);
   var powdepth = Math.pow(depth,2);
@@ -57,20 +57,12 @@ potencial2: function(amperage,spacing,depth,resistivity) {
       var v_ct3 = 2/(Math.sqrt(dpowspacing+dpowdepth));
       var rsolo = ct0*(v_ct1 + v_ct2 - v_ct3);
       return rsolo;
-    },
-    reletrica: function(amperage,spacing,depth,resistivity,rsolo) {
-      var powspacing = Math.pow(spacing,2);
-      var dpowspacing = Math.pow(2*spacing,2);
-      var powdepth = Math.pow(depth,2);
-      var dpowdepth = Math.pow(2*depth,2);      
-      var ct0 = (4*Math.PI*spacing*rsolo);
-      var ct2 = (2*spacing)/(Math.sqrt(powspacing+(dpowdepth)));
-      var ct3 = (2*spacing)/(Math.sqrt(dpowspacing+dpowdepth));
-      var cfinal = ct0/(1 + ct2 - ct3);
+    }, */
+    reletricasolo: function(spacing,rsolo) {
+      
+      var cfinal = (2*Math.PI*spacing*rsolo);
 
-      var altn = (2*Math.PI*spacing*rsolo);
-
-      return [cfinal,altn];
+      return cfinal;
     },
 
     depth: function(amperage,spacing,resistivity,rsolo) {

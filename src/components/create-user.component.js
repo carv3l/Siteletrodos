@@ -12,16 +12,12 @@ export default class CreateUser extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeAmperage = this.onChangeAmperage.bind(this);
     this.onChangeSpacing = this.onChangeSpacing.bind(this);
-    this.onChangeDepth = this.onChangeDepth.bind(this);
     this.onChangeResistivity = this.onChangeResistivity.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      amperage: '',
       spacing:'',
-      depth:'',
       resistivity:'',
       resistiv: []
     }
@@ -48,19 +44,9 @@ export default class CreateUser extends Component {
   
 
 
-  onChangeAmperage(e) {
-    this.setState({
-      amperage: e.target.value
-    })
-  }
   onChangeSpacing(e) {
     this.setState({
       spacing: e.target.value
-    })
-  }
-  onChangeDepth(e) {
-    this.setState({
-      depth: e.target.value
     })
   }
   onChangeResistivity(e) {
@@ -71,11 +57,8 @@ export default class CreateUser extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
     const dados = {
-      amperage: this.state.amperage,
       spacing: this.state.spacing,
-      depth: this.state.depth,
       resistivity: this.state.resistivity.split('-')[0]
     }
 
@@ -83,50 +66,25 @@ export default class CreateUser extends Component {
     
 
   
-    var v2 = operations.potencial2(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
-    var v3 = operations.potencial3(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
-    var v231 = operations.ddp23(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
+    //var v2 = operations.potencial2(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
+    //var v3 = operations.potencial3(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
+   // var v231 = operations.ddp23(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
 
-    var rsolo = operations.resolo(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
+    //var rsolo = operations.resolo(dados.amperage,dados.spacing,dados.depth,dados.resistivity);
 
-    var rsolo1 = v231/ dados.amperage;
+    //var rsolo1 = v231/ dados.amperage;
 
-    var v23 = v2-v3;
+    //var v23 = v2-v3;
 
-    var reletricaarray = operations.reletrica(dados.amperage,dados.spacing,dados.depth,dados.resistivity,rsolo);
+    var reletricaarray = operations.reletricasolo(dados.spacing,dados.resistivity);
 
-    var reletrica = reletricaarray[0];
-
-    var depth_required = operations.depth(dados.amperage,dados.spacing,dados.resistivity,rsolo);
-   // var reletrica1 = reletricaarray[1];
-
-    
-     
-    
-        // console.log("V2:"+v2);
-        // console.log("V3:"+v3);
-        // console.log("V23:"+v231);
-        // console.log("V231"+v23);
-        // console.log("ReSOlo: "+rsolo);
-        // console.log("Resolo1: "+rsolo1);
-
-        alert("V2: "+v2+"\n"+"V3: " + v3+"\n"+"V23: "+v231+
-        "\n"+"V231: "+v23+"\n"+"Resolo: "+rsolo+"\n"+"Resolo1: "+rsolo1+
-        "\n"+"Reletrica: "+reletrica+"\n"+
-        "\n"+"Profundidade: "+depth_required+" M \n");
-
-
-
-
-
-
-
-
-
+         //   alert("P: "+reletricaarray+"\n");
+    document.getElementById('resultado').innerHTML = reletricaarray+ " kOhm";
 
 
     this.setState({
-      amperage: ''
+      spacing: '',
+      resistivity: 0
     })
   }
 
@@ -136,26 +94,12 @@ export default class CreateUser extends Component {
         <h3>Calcular Resistividade Solo</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group"> 
-            <label>Intensidade da Corrente: </label>
-            <input  type="text"
-                required
-                className="form-control"
-                value={this.state.amperage}
-                onChange={this.onChangeAmperage}
-                />
-                <label>Espaçamento </label>
+            <label>Espaçamento </label>
             <input  type="text"
                 required
                 className="form-control"
                 value={this.state.spacing}
                 onChange={this.onChangeSpacing}
-                />
-                <label>Profundidade</label>
-            <input  type="text"
-                required
-                className="form-control"
-                value={this.state.depth}
-                onChange={this.onChangeDepth}
                 />
                 <label>Resistencia do Solo </label>
                 <select ref="userInput"
@@ -173,13 +117,20 @@ export default class CreateUser extends Component {
               }
           </select>
           </div>
-
-
-
           <div className="form-group">
             <input type="submit" value="Calcular" className="btn btn-primary" />
+
+            <input type="submit" value="+ Novo" className="btn" />
           </div>
+          
         </form>
+        <div className="form-group">
+        <label id="resultado">-</label>
+
+
+        </div>
+          
+
       </div>
     )
   }
