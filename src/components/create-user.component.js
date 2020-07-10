@@ -62,7 +62,7 @@ export default class CreateUser extends Component {
       resistivity: this.state.resistivity.split('-')[0]
     }
 
-    console.log(dados);
+       console.log(dados);
     
 
   
@@ -88,21 +88,21 @@ export default class CreateUser extends Component {
     })
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    //alert("E: Ola \n");
+  }
   render() {
     return (
       <div>
         <h3>Calcular Resistividade Solo</h3>
-        <form onSubmit={this.onSubmit}>
+        <form>
           <div className="form-group"> 
             <label>Espaçamento </label>
-            <input  type="text"
-                required
-                className="form-control"
-                value={this.state.spacing}
-                onChange={this.onChangeSpacing}
-                />
+            <input required type="text" className="form-control" value={this.state.spacing} onChange={this.onChangeSpacing} required/>
                 <label>Resistencia do Solo </label>
-                <select ref="userInput"
+                <input required type="text" className="form-control" value={this.state.resistivity} onChange={this.onChangeResistivity} required/>
+               {/*  <select ref="userInput"
               required
               className="form-control"
               value={this.state.resistivity}
@@ -115,28 +115,22 @@ export default class CreateUser extends Component {
                     </option>;
                 })
               }
-          </select>
+          </select> */}
+
+
           </div>
           <div className="form-group">
-            <input type="submit" value="Calcular" className="btn btn-primary" />
-
-            <input type="submit" value="+ Novo" className="btn" />
+          <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)} >Calcular</button>
+          <button type="submit" className="btn" name="new" onClick={this.handleSubmit.bind(this)} >+ Novo</button>
           </div>
           
         </form>
         <div className="form-group">
         <label id="resultado">-</label>
-
-
         </div>
-          
-
       </div>
     )
   }
-
- 
-
 }
 
 
