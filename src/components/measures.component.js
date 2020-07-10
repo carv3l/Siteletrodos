@@ -6,6 +6,7 @@ import axios from 'axios';
 
 var uri_get ="http://localhost:8080/measures/";
 
+
 //var uri_get ="https://eletrodos.herokuapp.com/soil/";
 
 const Measures = medidas => (
@@ -44,10 +45,10 @@ export default class ExercisesList extends Component {
 
   deleteExercise(id) {
 
-    axios.delete('http://localhost:8080/exercises/'+id)
+    axios.delete(uri_get+id)
       .then(response => { console.log(response.data)});
     this.setState({
-      eletrodos: this.state.eletrodos.filter(el => el._id !== id)
+      measure: this.state.measure.filter(el => el._id !== id)
 
     })
   }
