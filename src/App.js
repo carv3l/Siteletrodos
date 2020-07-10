@@ -6,7 +6,8 @@ import Navbar from "./components/navbar.component"
 import Soils from "./components/soils.component";
 import EditExercise from "./components/edit-exercise.component";
 import AddSoils from "./components/addsoil.component";
-import CreateUser from "./components/create-user.component";
+import Main from "./components/create-user.component";
+import Table from "./components/soils.component";
 
 function App() {
   return (
@@ -14,10 +15,12 @@ function App() {
     <div className="container">
       <Navbar />
       <br/>
-      <Route path="/" exact component={CreateUser} />
+      <Route path="/" exact component={Main}/>
       <Route path="/edit/:id" component={EditExercise} />
       <Route path="/AddSoil" component={AddSoils} />
       <Route path="/soils" component={Soils} />
+      <Route path="/table" component={Table} />
+
       </div>
     </Router>
   );

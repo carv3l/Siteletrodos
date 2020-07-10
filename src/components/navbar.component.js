@@ -11,13 +11,16 @@ export default class Navbar extends Component {
         <div className="collpase navbar-collapse">
         <ul className="navbar-nav nav">
           <li className="navbar-item">
-          <Link to="/" className="nav-link">NOTHING</Link>
+          <Link to="/" className="nav-link">Calcular</Link>
           </li>
           <li className="navbar-item">
-          <Link to="/AddSoil" className="nav-link">Add SOIL</Link>
+          <Link to="/AddSoil" className="nav-link">Add Solo</Link>
           </li>
           <li className="navbar-item">
-          <Link to="/soils" className="nav-link">SOILS</Link>
+          <Link to="/soils" className="nav-link">Solos</Link>
+          </li>
+          <li className="navbar-item">
+          <Link to="/soils" className="nav-link">Medidas Guardadas</Link>
           </li>
         </ul>
         </div>
