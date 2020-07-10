@@ -5,7 +5,7 @@ var eSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    r_medida: {
+    r_medido: {
         type: String,
         required: true
     },
@@ -15,7 +15,7 @@ var eSchema = mongoose.Schema({
     }
 });
 
-var medida = module.exports = mongoose.model('Eletrodo', eSchema);
+var medida = module.exports = mongoose.model('Medida', eSchema);
 
 module.exports.get = function (callback, limit) {
     medida.find(callback).limit(limit);
