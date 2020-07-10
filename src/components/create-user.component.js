@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
 var operations = require('./Operations');
 
 
 var uri_get ="http://localhost:8080/soil/";
+var uri_post_measure="http://localhost:8080/soil/add_measure"
 //var uri_get ="https://eletrodos.herokuapp.com/soil/";
 
 
@@ -12,14 +14,15 @@ export default class CreateUser extends Component {
   constructor(props) {
     super(props);
 
+    
     this.onChangeSpacing = this.onChangeSpacing.bind(this);
     this.onChangeResistivity = this.onChangeResistivity.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-
+ 
     this.state = {
       spacing:'',
       resistivity:'',
-      resistiv: []
+      rsolo:''
     }
 
     
@@ -78,19 +81,54 @@ export default class CreateUser extends Component {
 
     var reletricaarray = operations.reletricasolo(dados.spacing,dados.resistivity);
 
+    this.state.rsolo = reletricaarray;
+
          //   alert("P: "+reletricaarray+"\n");
+    document.getElementById('espacamento').innerHTML = this.state.spacing+ " Metros";
+    document.getElementById('r_medida').innerHTML = this.state.resistivity+ " kOhm";
     document.getElementById('resultado').innerHTML = reletricaarray+ " kOhm";
 
 
-    this.setState({
+
+    const Search = () => {
+      const [showResults, setShowResults] = React.useState(false)
+      const onClick = () => setShowResults(true)
+      return (
+        <div>
+          <button type="submit" className="btn" id="save" name="save" onClick={this.handleSubmit.bind(this)} >Guardar</button>
+          { showResults ? <Results /> : null }
+        </div>
+      )
+    }
+    
+    const Results = () => (
+      <div id="results" className="search-results">
+        Some Results
+      </div>
+    )
+    
+    ReactDOM.render(<Search />, document.querySelector("#container"))
+
+
+    /* this.setState({
       spacing: '',
       resistivity: 0
-    })
+    }) */
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    //alert("E: Ola \n");
+    const measure = {
+      espacamento: this.state.spacing,
+      rmedido: this.state.resistivity,
+      rsolo: this.state.rsolo,
+    }
+
+    console.log(measure);
+
+    axios.post(uri_post_measure, measure)
+      .then(res => console.log(res.data));
+
   }
   render() {
     return (
@@ -121,12 +159,21 @@ export default class CreateUser extends Component {
           </div>
           <div className="form-group">
           <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)} >Calcular</button>
-          <button type="submit" className="btn" name="new" onClick={this.handleSubmit.bind(this)} >+ Novo</button>
+          
           </div>
           
         </form>
         <div className="form-group">
-        <label id="resultado">-</label>
+        <label id="espacamento"></label>
+        <br></br>
+        <label id="r_medida"></label>
+        <br></br>
+        <label id="resultado"></label>
+        <br></br>
+        <div id="container">
+       
+        </div>
+        
         </div>
       </div>
     )
