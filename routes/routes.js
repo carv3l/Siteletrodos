@@ -1,5 +1,6 @@
 const router = require('express').Router();
 let Eletrodo = require('../models/modelEletrodo');
+let Measure = require('../models/modelMeasure');
 
 
 
@@ -31,5 +32,26 @@ router.route('/add').post((req, res) => {
       .then(() => res.json('Soil added!'))
       .catch(err => res.status(400).json('Error: ' + err));
   });
+
+  router.route('/add_measure').post((req, res) => {
+
+    const espacamento = req.body.espacamento;
+    const r_medido = req.body.rmedido;
+    const r_solo = req.body.rsolo;
+
+  
+    const newmeasure = new Measure({
+        espacamento,
+        r_medido,
+        r_solo,
+    });
+  
+    newmeasure.save()
+      .then(() => res.json('Medida Adicionada!'))
+      .catch(err => res.status(400).json('Error: ' + err));
+  });
+
+
+
 
     module.exports = router;
