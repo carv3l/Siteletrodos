@@ -15,12 +15,14 @@ router.get('/', function (req, res) {
     const espacamento = req.body.espacamento;
     const r_medido = req.body.rmedido;
     const r_solo = req.body.rsolo;
+    const nota = req.body.nota;
 
   
     const newmeasure = new Measure({
         espacamento,
         r_medido,
         r_solo,
+        nota
     });
   
     newmeasure.save()

@@ -13,6 +13,8 @@ const Measures = medidas => (
     <td>{medidas.measure.espacamento}</td>
     <td>{medidas.measure.r_medido}</td>
     <td>{medidas.measure.r_solo}</td>
+    <td>{medidas.measure.nota}</td>
+
     <td>
       <Link to={"/edit/"+medidas.measure._id}>edit</Link> | <a href="#" onClick={() => { medidas.deleteExercise(medidas.measure._id) }}>delete</a>
 
@@ -69,7 +71,7 @@ export default class ExercisesList extends Component {
               <th>Espaçamento</th>
               <th>Resistencia Medida</th>
               <th>Resistencia Solo</th>
-
+              <th>Notas</th>
               <th>Actions</th>
             </tr>
           </thead>

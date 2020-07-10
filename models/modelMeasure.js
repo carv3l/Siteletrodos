@@ -12,6 +12,10 @@ var eSchema = mongoose.Schema({
     r_solo: {
         type: String,
         required: true
+    },
+    nota: {
+        type: String,
+        required: false
     }
 });
 

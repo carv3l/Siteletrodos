@@ -118,10 +118,19 @@ export default class CreateUser extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
+    let nota = prompt('Adicione uma nota');
+    //let bar = confirm('Confirm or deny');
+    //console.log(nota, bar);
+
+
+
+
     const measure = {
       espacamento: this.state.spacing,
       rmedido: this.state.resistivity,
       rsolo: this.state.rsolo,
+      nota: nota
     }
 
     console.log(measure);
