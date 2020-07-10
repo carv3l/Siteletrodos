@@ -29,4 +29,14 @@ router.get('/', function (req, res) {
       .then(() => res.json('Medida Adicionada!'))
       .catch(err => res.status(400).json('Error: ' + err));
   });
+
+
+  router.route('/:id').delete((req, res) => {
+    Measure.findByIdAndDelete(req.params.id)
+      .then(() => res.json('Medida Apagada.'))
+      .catch(err => res.status(400).json('Error: ' + err));
+  });
+
+
+
     module.exports = router;
