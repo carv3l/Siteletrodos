@@ -5,7 +5,7 @@ var operations = require('./Operations');
 
 
 var uri_get ="http://localhost:8080/soil/";
-var uri_post_measure="http://localhost:8080/soil/add_measure"
+var uri_post_measure="http://localhost:8080/measures/add_measure"
 //var uri_get ="https://eletrodos.herokuapp.com/soil/";
 
 

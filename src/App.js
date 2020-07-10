@@ -7,7 +7,7 @@ import Soils from "./components/soils.component";
 import EditExercise from "./components/edit-exercise.component";
 import AddSoils from "./components/addsoil.component";
 import Main from "./components/create-user.component";
-import Table from "./components/soils.component";
+import Table from "./components/measures.component";
 
 function App() {
   return (
