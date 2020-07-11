@@ -20,7 +20,7 @@ constructor(props) {
           id: "basic-bar"
         },
         xaxis: {
-          categories: [1,2,3]
+          categories: []
         },
         markers: {
           size: 5,
@@ -60,29 +60,46 @@ constructor(props) {
         
         console.log(medida);
 
-        //Criacao de um array com valores da bd
-        var arraydata =[];
+        //Criacao de um array com valores da bd para o Y
+        var array_rsolo =[];
         for (var i = 0; i < medida.length; i++) {
-          arraydata.push(medida[i]['r_solo']);
+          array_rsolo.push(medida[i]['r_solo']);
 
         }
-        console.log(arraydata);
+        
+        //Criacao de um array com valores da bd para o x (numero medidas)
+        var array_nmedidas =[];
+        for (var i = 0; i < medida.length; i++) {
+            array_nmedidas.push(i+1);
+          }
+        //alert('nmedidas:'+array_nmedidas);
+
+
+        this.setState(prevState => {
+            let options = Object.assign({}, prevState.options); // creating copy of state variable jasper
+            options.xaxis.categories = array_nmedidas;                     // update the name property, assign a new value                 
+            return { options };                                 // return new object jasper object
+          })
+        //alert("Oi"+this.state.options.xaxis.categories);
+
+        console.log(array_rsolo);
         var name = "Medida 1";
         this.setState(prevState => {                        
             let series = { ...prevState.series[0] };            // creating copy of state variable serie 
             series = JSON.stringify(series);                    //convertin object to string
-            series = JSON.parse('[{"name":"'+name+'","data":['+arraydata+']}]'); // update and parsing to object                                  
+            series = JSON.parse('[{"name":"'+name+'","data":['+array_rsolo+']}]'); // update and parsing to object                                  
             return {series};                                 // return new object
           }); 
 
-       // this.setState({categories: arraydata});
+       // this.setState({categories: array_rsolo});
   }
 
 
 
 
   render() {
-    //console.log("ola categories "+ this.state.options.xaxis.categories)
+    //console.log("ola categories "+ JSON.stringify(this.state.options));
+    //alert("Oi there mate"+this.state.options.xaxis.categories);
   //  console.log("ola series "+ this.state.series.data)
    
     return (
