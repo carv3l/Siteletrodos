@@ -61,7 +61,6 @@ export default class graph extends Component {
         
     
 render() {
-  
     return (
 <canvas
   id="canvas"
