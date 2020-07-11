@@ -22,7 +22,7 @@ export default class CreateUser extends Component {
     this.state = {
       spacing:'',
       resistivity:'',
-      rsolo: 0
+      rsolo:''
     }
 
     
@@ -82,10 +82,11 @@ export default class CreateUser extends Component {
     var reletricaarray = operations.reletricasolo(dados.spacing,dados.resistivity);
 
     //Arredondar 2 casas
-    reletricaarray = Math.round(reletricaarray * 100) / 100
+    reletricaarray = Math.round(reletricaarray * 100) / 100;
+    reletricaarray = Math.round(reletricaarray * 100) / 100;
 
-   
-    
+    this.state.rsolo = reletricaarray;
+    //alert("P: "+this.state.rsolo+"\n");
 
          //   alert("P: "+reletricaarray+"\n");
     document.getElementById('espacamento').innerHTML = this.state.spacing+ " Metros";
@@ -143,7 +144,8 @@ export default class CreateUser extends Component {
       .then(res => console.log(res.data))
       .catch((error) => {
                console.log(error);
-             })
+             });
+      
 
   }
   render() {
