@@ -9,7 +9,7 @@ import AddSoils from "./components/addsoil.component";
 import Main from "./components/create-user.component";
 import Table from "./components/measures.component";
 import Graph from "./components/chart.component";
-import Graph from "./components/";
+
 
 function App() {
   return (
