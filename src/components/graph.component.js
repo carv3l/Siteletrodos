@@ -10,6 +10,10 @@ export default class graph extends Component {
        }
        componentDidMount() {
         const canvas = document.getElementById("canvas");
+        const x = x => 4;
+        const y = y => 23;
+        var a=4;
+        var p=123;
         const plotta = new Plotta(canvas, {
             linedatas: [
               {
@@ -18,8 +22,8 @@ export default class graph extends Component {
                 legend: "cos",
                 color: "#55A8DE",
                 visible: true,
-                func: Math.cos,
-                dotNum: 1000
+                func: x,y,
+                dotNum: 100
               }
             ],
             config: {
@@ -28,7 +32,14 @@ export default class graph extends Component {
                 color: "#666666",
                 text: "Medidas"
               },
-              
+              axis: {
+                x: {
+                  label: 'espacamento'
+                },
+                y: {
+                  label: 'p'
+                }
+              },
               grid: {
                 visible: true,
                 color: "#888888"
@@ -37,15 +48,20 @@ export default class graph extends Component {
                 visible: true,
                 color: "#DDDDDD",
                 width: 200
+              },
+              table: {
+                visible: true
               }
             }
           })
+         
 
 
        }
         
     
 render() {
+  
     return (
 <canvas
   id="canvas"

@@ -8,7 +8,7 @@ import EditExercise from "./components/edit-exercise.component";
 import AddSoils from "./components/addsoil.component";
 import Main from "./components/create-user.component";
 import Table from "./components/measures.component";
-import Graph from "./components/graph.component";
+import Graph from "./components/chart.component";
 
 function App() {
   return (
@@ -21,7 +21,7 @@ function App() {
       <Route path="/AddSoil" component={AddSoils} />
       <Route path="/soils" component={Soils} />
       <Route path="/table" component={Table} />
-      <Route path="/graph" component={Graph} />
+      <Route path="/chart" component={Graph} />
       </div>
     </Router>
   );
