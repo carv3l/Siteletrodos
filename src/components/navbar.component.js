@@ -22,6 +22,9 @@ export default class Navbar extends Component {
           <li className="navbar-item">
           <Link to="/table" className="nav-link">Medidas Guardadas</Link>
           </li>
+          <li className="navbar-item">
+          <Link to="/graph" className="nav-link">Graph</Link>
+          </li>
         </ul>
         </div>
         </div>
