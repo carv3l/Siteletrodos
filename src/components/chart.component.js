@@ -17,18 +17,22 @@ constructor(props) {
     this.state = {
       options: {
         chart: {
-          id: "basic-bar"
+          id: "basic-line"
         },
         xaxis: {
           categories: []
         },
         markers: {
           size: 5,
-      },
+      },    
       stroke: {
         curve: 'smooth',
       }
       },
+      legend: {
+        show: true,
+        position: 'bottom'
+      },  
       series: [
         {
           name: "series-1",
