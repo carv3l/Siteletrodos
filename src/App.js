@@ -21,7 +21,7 @@ function App() {
       <Route path="/AddSoil" component={AddSoils} />
       <Route path="/soils" component={Soils} />
       <Route path="/table" component={Table} />
-      <Route path="/graph" component={Table} />
+      <Route path="/graph" component={Graph} />
       </div>
     </Router>
   );
