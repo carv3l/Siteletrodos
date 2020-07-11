@@ -10,7 +10,7 @@ var eSchema = mongoose.Schema({
         required: true
     },
     r_solo: {
-        type: String,
+        type: Number,
         required: true
     },
     nota: {
