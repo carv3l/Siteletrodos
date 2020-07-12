@@ -1,72 +1,77 @@
-import React, { Component } from 'react';
-import Plotta from 'plotta.js';
+import React, { Component } from "react";
+import Chart from "react-apexcharts";
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 
-export default class graph extends Component {
-    constructor(props) {
-        super(props); 
-        
-       }
-       componentDidMount() {
-        const canvas = document.getElementById("canvas");
-        const x = x => 4;
-        const y = y => 23;
-        var a=4;
-        var p=123;
-        const plotta = new Plotta(canvas, {
-            linedatas: [
-              {
-                id: "line1",
-                type: "func",
-                legend: "cos",
-                color: "#55A8DE",
-                visible: true,
-                func: x,y,
-                dotNum: 100
-              }
-            ],
-            config: {
-              title: {
-                location: "center",
-                color: "#666666",
-                text: "Medidas"
-              },
-              axis: {
-                x: {
-                  label: 'espacamento'
-                },
-                y: {
-                  label: 'p'
-                }
-              },
-              grid: {
-                visible: true,
-                color: "#888888"
-              },
-              border: {
-                visible: true,
-                color: "#DDDDDD",
-                width: 200
-              },
-              table: {
-                visible: true
-              }
-            }
-          })
-         
-
-
-       }
-        
-    
-render() {
+class App extends Component {
+constructor(props) {
+    super(props);
+  this.state = {measure: []};
+    this.state = {
+      options: {chart: {
+        height: 350,
+        type: 'line',
+      },
+      stroke: {
+        width: [0, 4]
+      },
+      title: {
+        text: 'Traffic Sources'
+      },
+      dataLabels: {
+        enabled: true,
+        enabledOnSeries: [1]
+      }
+    },    
+      stroke: {
+        curve: 'smooth',
+        //width: [1, 4]
+      },series: [{
+        name: 'Website Blog',
+        type: 'column',
+        data: [440, 505, 414, 671, 227, 413, 201, 352, 752, 320, 257, 160]
+      }, {
+        name: 'Social Media',
+        type: 'line',
+        data: [23, 42, 35, 27, 43, 22, 17, 31, 22, 22, 12, 16]
+      }],
+      
+      labels: ['01 Jan 2001', '02 Jan 2001', '03 Jan 2001', '04 Jan 2001', '05 Jan 2001', '06 Jan 2001', '07 Jan 2001', '08 Jan 2001', '09 Jan 2001', '10 Jan 2001', '11 Jan 2001', '12 Jan 2001'],
+      xaxis: {
+        type: 'datetime'
+      },
+      yaxis: [{
+        title: {
+          text: 'Website Blog',
+        },
+      
+      }, {
+        opposite: true,
+        title: {
+          text: 'Social Media'
+        }
+      }
+    ]
+    };
+  }
+  render() {
     return (
-<canvas
-  id="canvas"
-  width="700px"
-  height="700px"
-  style={{width: '700px', height:'700px', border:'1px'}}
-></canvas>
-    )}
+      <div className="app">
+        <div className="row">
+          <div className="mixed-chart">
+            <Chart
+              options={this.state.options}
+              series={this.state.series}
+              type="line"
+              width="860"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
+
+export default App;
