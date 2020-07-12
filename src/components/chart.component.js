@@ -7,11 +7,15 @@ var operations = require('./Operations');
 
 
 var uri_get ="http://localhost:8080/measures/";
-var array_media= [];
+var array_media = [];
+var larray_media= [];
 var array_nmedidas = [];
+var larray_nmedidas = [];
 var array_rsolo = [];
+var larray_rsolo = [];
 var medida;
 var vtoggle = false;
+var newState = {};
 const initialState = {
   options: {
     chart: {
@@ -95,7 +99,7 @@ constructor(props) {
         
         for (let index = 0; index < medida.length; index++) {
           array_media.push(media);
-        }        
+        }
         //Criacao de um array com valores da bd para o x (numero medidas)
         
         for (var i = 0; i < medida.length; i++) {
@@ -122,43 +126,42 @@ constructor(props) {
             return {series};                                 // return new object
           }); 
           this.reset();
+          
   }
-  //shouldComponentUpdate(){
-   // this.setState(initialState)
- // }
-
-
-  //Fazer reset ao compoene
-  //componentWillUnmount() { 
-  //  this.setState(initialState)
-  //}
-
   async onSubmit(e) {
     //this.setState(initialState)
- 
-    vtoggle=true;
+    vtoggle=!vtoggle;
 
- await this.setState(prevState => {
+    this.setState(prevState => {
       let options = Object.assign({}, prevState.options); // creating copy of state variable options
        options.dataLabels.enabled = vtoggle;                  // update the name property, assign a new value                 
       return { options };// return new object options object
     })
-    this.setState({ options: this.state.options})
-
+    //this.setState({ options: this.state.options})
+    //this.forceUpdate();
   }
+  
+  //componentDidUpdate(){
+
+//console.log(this.state.options.dataLabels.enabled);
+ // }
+ 
+
   stratifiedSoil(e) {
     var count = 0;
-    for (let i= 0; i < array_nmedidas.length; i++) {
-     var res = operations.isNumberWithinPercentOfNumber(array_media[0],0.15,array_rsolo[i]);//Aqui o 15% tem de ser 0.15
-      //console.log("res:"+res,array_rsolo[i],+array_media[0]);
+    console.log("upo:"+larray_nmedidas.length);
+    for(let i= 0; i < larray_nmedidas.length; i++) {
+     var res = operations.isNumberWithinPercentOfNumber(larray_media[0],0.15,larray_rsolo[i]);//Aqui o 15% tem de ser 0.15
+      console.log("res:"+res,larray_rsolo[i],+larray_media[0]);
       if (res) {
         count++;
-       // console.log("res:"+res,array_rsolo[i],+array_media[0]);
+        console.log(count);
+        console.log("res:"+res,larray_rsolo[i],+larray_media[0]);
       }
 
     }
 
-    if (count == array_nmedidas.length) {
+    if (count == larray_nmedidas.length) {
       alert("SOLO HOMOGENEO");
       
     }else{
@@ -168,6 +171,9 @@ constructor(props) {
   }
 
   reset(){
+    larray_media = array_media;
+    larray_nmedidas = array_nmedidas;
+    larray_rsolo = array_rsolo;
     array_media= [];
     array_nmedidas = [];
     array_rsolo = [];
@@ -177,7 +183,7 @@ constructor(props) {
   render() {
     //console.log("ola categories "+ JSON.stringify(this.state.options));
    // alert("Oi"+this.state.options.dataLabels.enabled);
-   console.log(this.state.options);
+   
     return (
       <div className="app">
         <div className="row">
@@ -190,8 +196,8 @@ constructor(props) {
             />
           </div> 
         </div>
-        {/* <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)} >Ver Dados</button> */}
-        {/* <button type="submit" className="btn btn-primary" onClick={this.stratifiedSoil.bind(this)} >Stratified Soil</button> */}
+         <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)} >Ver Dados</button>
+         <button type="submit" className="btn btn-primary" onClick={this.stratifiedSoil.bind(this)} >Análise</button>
       </div>
 
     );
