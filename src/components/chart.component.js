@@ -19,6 +19,9 @@ constructor(props) {
         chart: {
           id: "basic-line"
         },
+        tooltip: {
+          enabled: true,
+          },
         xaxis: {
           categories: []
         },
@@ -30,8 +33,10 @@ constructor(props) {
       }
       },
       dataLabels: {
-        enabled: true
+        enabled: true,
+        enabledOnSeries: [0]
       },
+      labels: ['01 Jan 2001', '02 Jan 2001'],
       colors: ["#FF1654", "#247BA0"],
       series: [
         {
