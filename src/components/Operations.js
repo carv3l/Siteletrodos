@@ -86,11 +86,12 @@
   
     },
 
-    isNumberWithinPercentOfNumber(number, percent, media) {
+    isNumberWithinPercentOfNumber(media, percent, number) {
       let valuetotest = Math.abs(number-media);
-      let filter = percent * media
+      let filter = percent * media;
       let decimalPercent;
-      if(valuetotest< filter){
+     // console.log("operations:"+valuetotest+"< "+filter);
+      if(valuetotest < filter){
         decimalPercent = true;
       }else{
         decimalPercent=false;
