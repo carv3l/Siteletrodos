@@ -17,8 +17,8 @@ constructor(props) {
     this.state = {
       options: {
         chart: {
-          id: "basic-line"
-        },
+          id: "basic-line",
+          },
         tooltip: {
           enabled: true,
           },
@@ -30,11 +30,12 @@ constructor(props) {
       },    
       stroke: {
         curve: 'smooth',
-      }
+        //width: [1, 4]
       },
-      dataLabels: {
-        enabled: true,
-        enabledOnSeries: [0]
+      dataLabels: {//mostra o valor nos pontos
+       // enabled: true,
+      //  enabledOnSeries: [0, 1]
+      }
       },
       labels: ['01 Jan 2001', '02 Jan 2001'],
       colors: ["#FF1654", "#247BA0"],
