@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import Chart from "react-apexcharts";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+var operations = require('./Operations');
 
 
 
 var uri_get ="http://localhost:8080/measures/";
-
+var array_media= [];
+var array_nmedidas = [];
+var array_rsolo = [];
 var vtoggle = false;
 class App extends Component {
 constructor(props) {
@@ -48,6 +51,9 @@ constructor(props) {
         },
     ]
     };
+
+    
+    
   }
 //async e await para esperar que haja response do axios
   async componentDidMount() {
@@ -73,7 +79,7 @@ constructor(props) {
         console.log(medida);
 
         //Criacao de um array com valores da bd para o Y
-        var array_rsolo =[];
+       
         var soma=0;
         var media=0;
         for (var i = 0; i < medida.length; i++) {
@@ -84,12 +90,12 @@ constructor(props) {
 
         //Colocar a media num array para mostrar no grafico
         //alert("media"+media);
-        var media_array=[];
+        
         for (let index = 0; index < medida.length; index++) {
-          media_array.push(media);
+          array_media.push(media);
         }        
         //Criacao de um array com valores da bd para o x (numero medidas)
-        var array_nmedidas =[];
+        
         for (var i = 0; i < medida.length; i++) {
             array_nmedidas.push(i+1);
           }
@@ -110,7 +116,7 @@ constructor(props) {
             let series = { ...prevState.series };           // creating copy of state variable serie 
           //  alert("in"+JSON.stringify(series));
             series = JSON.stringify(series); //convertin object to string
-            series = JSON.parse('[{"name":"'+name1+'","data":['+array_rsolo+']},{"name":"'+name2+'","data":['+media_array+']}]'); // update and parsing to object                                  
+            series = JSON.parse('[{"name":"'+name1+'","data":['+array_rsolo+']},{"name":"'+name2+'","data":['+array_media+']}]'); // update and parsing to object                                  
             return {series};                                 // return new object
           }); 
 
@@ -120,23 +126,49 @@ constructor(props) {
 
 
   async onSubmit(e) {
+    
  
     vtoggle=true;
 
  await this.setState(prevState => {
       let options = Object.assign({}, prevState.options); // creating copy of state variable options
        options.dataLabels.enabled = vtoggle;                  // update the name property, assign a new value                 
-      return { options };           
-                            // return new object options object
+      return { options };// return new object options object
     })
+    this.setState({ options: this.state.options})
 
-    this.render.bind(this);
   }
+
+
+
+  stratifiedSoil(e) {
+    var count = 0;
+    for (let i= 0; i < array_nmedidas.length; i++) {
+     var res = operations.isNumberWithinPercentOfNumber(array_media[0],0.15,array_rsolo[i]);//Aqui o 15% tem de ser 0.15
+      //console.log("res:"+res,array_rsolo[i],+array_media[0]);
+      if (res) {
+        count++;
+       // console.log("res:"+res,array_rsolo[i],+array_media[0]);
+      }
+
+    }
+
+    if (count == array_nmedidas.length) {
+      alert("SOLO HOMOGENEO");
+      
+    }else{
+      alert("SOLO NÃO HOMOGENEO \n Nº  Medidas Compativeis: "+count);
+    }
+
+    this.forceUpdate();
+  }
+
+
 
   render() {
     //console.log("ola categories "+ JSON.stringify(this.state.options));
    // alert("Oi"+this.state.options.dataLabels.enabled);
-   console.log(this.state.options.dataLabels.enabled)
+   console.log(this.state.options);
 
     return (
       <div className="app">
@@ -148,11 +180,10 @@ constructor(props) {
               type="line"
               width="860"
             />
-          </div>
-          
+          </div> 
         </div>
-
-        <button type="text" align="center" className="btn btn-primary" onClick={this.onSubmit.bind(this)} >Ver Dados</button>
+        {/* <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)} >Ver Dados</button> */}
+        {/* <button type="submit" className="btn btn-primary" onClick={this.stratifiedSoil.bind(this)} >Stratified Soil</button> */}
       </div>
 
     );

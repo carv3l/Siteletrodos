@@ -84,7 +84,20 @@
     }  while(rsolol != rsolo);
   return i; 
   
-    }
+    },
+
+    isNumberWithinPercentOfNumber(number, percent, media) {
+      let valuetotest = Math.abs(number-media);
+      let filter = percent * media
+      let decimalPercent;
+      if(valuetotest< filter){
+        decimalPercent = true;
+      }else{
+        decimalPercent=false;
+      }
+       return decimalPercent;
+   },
+
 
 
   }
