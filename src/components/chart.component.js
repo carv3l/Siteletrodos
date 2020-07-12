@@ -7,12 +7,10 @@ import axios from 'axios';
 
 var uri_get ="http://localhost:8080/measures/";
 
-
-
-
+var vtoggle = false;
 class App extends Component {
 constructor(props) {
-    super(props);
+    super(props);  
   this.state = {measure: []};
     this.state = {
       options: {
@@ -33,8 +31,8 @@ constructor(props) {
         //width: [1, 4]
       },
       dataLabels: {//mostra o valor nos pontos
-       // enabled: true,
-      //  enabledOnSeries: [0, 1]
+        enabled: vtoggle,
+        enabledOnSeries: [0, 1]
       }
       },
       labels: ['01 Jan 2001', '02 Jan 2001'],
@@ -117,16 +115,29 @@ constructor(props) {
           }); 
 
        // this.setState({categories: array_rsolo});
+       
   }
 
 
+  async onSubmit(e) {
+ 
+    vtoggle=true;
 
+ await this.setState(prevState => {
+      let options = Object.assign({}, prevState.options); // creating copy of state variable options
+       options.dataLabels.enabled = vtoggle;                  // update the name property, assign a new value                 
+      return { options };           
+                            // return new object options object
+    })
+
+    this.render.bind(this);
+  }
 
   render() {
     //console.log("ola categories "+ JSON.stringify(this.state.options));
-    //alert("Oi there mate"+this.state.options.xaxis.categories);
-  //  console.log("ola series "+ this.state.series.data)
-   
+   // alert("Oi"+this.state.options.dataLabels.enabled);
+   console.log(this.state.options.dataLabels.enabled)
+
     return (
       <div className="app">
         <div className="row">
@@ -138,8 +149,12 @@ constructor(props) {
               width="860"
             />
           </div>
+          
         </div>
+
+        <button type="text" align="center" className="btn btn-primary" onClick={this.onSubmit.bind(this)} >Ver Dados</button>
       </div>
+
     );
   }
 }
