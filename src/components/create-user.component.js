@@ -83,7 +83,7 @@ export default class CreateUser extends Component {
 
     //Arredondar 2 casas
     reletricaarray = Math.round(reletricaarray * 100) / 100;
-    reletricaarray = Math.round(reletricaarray * 100) / 100;
+   // reletricaarray = Math.round(reletricaarray * 100) / 100;
 
     this.state.rsolo = reletricaarray;
     //alert("P: "+this.state.rsolo+"\n");
