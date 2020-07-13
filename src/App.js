@@ -9,7 +9,9 @@ import AddSoils from "./components/addsoil.component";
 import Main from "./components/create-user.component";
 import Table from "./components/measures.component";
 import Graph from "./components/chart.component";
-
+import Login from "./components/login.component";
+import SignIn from "./components/signIn.component";
+import ControlPanel from "./components/administration.component";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
       <Route path="/soils" component={Soils} />
       <Route path="/table" component={Table} />
       <Route path="/chart" component={Graph} />
+      <Route path="/Login" component={Login} />
+      <Route path="/SignIn" component={SignIn} />
       </div>
     </Router>
   );

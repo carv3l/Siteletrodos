@@ -3,11 +3,12 @@ import Chart from "react-apexcharts";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
+import { Redirect } from 'react-router-dom'
 var operations = require('./Operations');
 
 
-var uri_get ="https://eletrodos.herokuapp.com/measures/";
-//var uri_get ="http://localhost:8080/measures/";
+//var uri_get ="https://eletrodos.herokuapp.com/measures/";
+var uri_get ="http://localhost:8080/measures/";
 var array_media = [];
 var larray_media= [];
 var array_nmedidas = [];
@@ -82,7 +83,7 @@ constructor(props) {
         //alert(this.state.options.xaxis.categories)
         medida = this.state.measure;
     
-        console.log(medida.length);
+        //console.log(medida.length);
        
         console.log(medida);
       
@@ -145,6 +146,7 @@ constructor(props) {
     })
     //this.setState({ options: this.state.options})
     //this.forceUpdate();
+    this.props.history.push('./')
   }
   
   //componentDidUpdate(){
@@ -292,6 +294,8 @@ constructor(props) {
           </div> 
           </th>
     <th valign = "top">
+    <div id='output'>
+</div>
     
     
     </th>
@@ -303,9 +307,7 @@ constructor(props) {
          <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)}>Ver Dados</button>
          <button type="submit" className="btn btn-primary" onClick={this.stratifiedSoil.bind(this)}>Análise</button>
       
-      <div id='output'>
-
-</div>
+      
 </div>
 
     );

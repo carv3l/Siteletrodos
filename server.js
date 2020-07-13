@@ -11,7 +11,7 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 app.use(cors());
 
 
@@ -29,11 +29,13 @@ db.once('open', () => {
     console.log("MongoDB database connection established successfully");
   })
   const routes = require("./routes/routes");
-  var routesmeasures = require("./routes/routes_measures");
+  const routesmeasures = require("./routes/routes_measures");
+  const routesusers = require("./routes/routes_users");
 
   
     app.use('/soil', routes);
     app.use('/measures', routesmeasures);
+    app.use('/users', routesusers);
 
     app.listen(port, () => {
         console.log(`Server is running on port: ${port}`);
