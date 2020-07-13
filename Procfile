@@ -1,3 +1,3 @@
-web: nodemon server.js & wait -n & npm start
+web: nodemon server.js & wait -n
 
 
