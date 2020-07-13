@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Chart from "react-apexcharts";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
 var operations = require('./Operations');
 
 
@@ -13,6 +14,7 @@ var array_nmedidas = [];
 var larray_nmedidas = [];
 var array_rsolo = [];
 var larray_rsolo = [];
+var measures_to_store =[];
 var medida;
 var vtoggle = false;
 var newState = {};
@@ -53,15 +55,16 @@ const initialState = {
 ]
 };
 
-
 class App extends Component {
+  
 
 // shouldComponentUpdate = () => false;
 constructor(props) {
     super(props);  
-  this.state = {measure: []};
+  this.state = {measure: [],retrieved_data: []};
   this.state = initialState;
   }
+  
 //async e await para esperar que haja response do axios
   async componentDidMount() {
     await axios.get(uri_get)
@@ -105,16 +108,12 @@ constructor(props) {
         for (var i = 0; i < medida.length; i++) {
             array_nmedidas.push(i+1);
           }
-        //alert('nmedidas:'+array_nmedidas);
-
-
         this.setState(prevState => {
             let options = Object.assign({}, prevState.options); // creating copy of state variable options
             options.xaxis.categories = array_nmedidas;                     // update the name property, assign a new value                 
             return { options };                                 // return new object options object
           })
-        //alert("Oi"+this.state.options.xaxis.categories);
-
+   
         console.log(array_rsolo);
         var name1 = "Medida";
         var name2 = "Average";
@@ -127,7 +126,14 @@ constructor(props) {
           }); 
           this.reset();
           
-  }
+        }
+
+
+       
+
+
+
+
   async onSubmit(e) {
     //this.setState(initialState)
     vtoggle=!vtoggle;
@@ -148,15 +154,19 @@ constructor(props) {
  
 
   stratifiedSoil(e) {
+    
     var count = 0;
+    var measures_to_store =[];
     console.log("upo:"+larray_nmedidas.length);
     for(let i= 0; i < larray_nmedidas.length; i++) {
      var res = operations.isNumberWithinPercentOfNumber(larray_media[0],0.15,larray_rsolo[i]);//Aqui o 15% tem de ser 0.15
       console.log("res:"+res,larray_rsolo[i],+larray_media[0]);
       if (res) {
+        this.loadData(larray_rsolo[i]);
+        //measures_to_store.push(larray_rsolo[i]);
         count++;
         console.log(count);
-        console.log("res:"+res,larray_rsolo[i],+larray_media[0]);
+        //console.log("res:"+res,measures_to_store);
       }
 
     }
@@ -165,10 +175,22 @@ constructor(props) {
       alert("SOLO HOMOGENEO");
       
     }else{
-      alert("SOLO NÃO HOMOGENEO \n Nº  Medidas Compativeis: "+count);
+      alert("SOLO NÃO HOMOGENEO \n Nº Medidas Compativeis: "+count);
     }
-
+    this.exerciseList()
   }
+
+  loadData(soil) {
+    for (var i = 0; i < medida.length; i++) {
+      if(medida[i]['r_solo']==soil){
+
+        measures_to_store.push(medida[i]);
+      }
+    }
+}
+
+
+
 
   reset(){
     larray_media = array_media;
@@ -179,14 +201,84 @@ constructor(props) {
     array_rsolo = [];
   }
 
+  exerciseList() {
+    console.log("measu:",measures_to_store);
+    var output = document.getElementById('output');
+    output.innerHTML = this.json2Table(measures_to_store);
+    /* if(measures_to_store != 0){
+ 
+    return measures_to_store.map(current => {
+      return <Measure_row measure={current}/>;
+    })
+  }
+  */
 
+
+  }
+
+
+  json2Table(json) { //https://dev.to/boxofcereal/how-to-generate-a-table-from-json-data-with-es6-methods-2eel
+    let columns = Object.keys(json[0]);
+
+    //console.log("cols"+cols[index]);
+    //Mostrar só os dados importantes
+    let cols = []; 
+    for (let index = 1; index < columns.length-1; index++) {
+      cols.push(columns[index]);
+    }
+  
+    //Map over columns, make headers,join into string
+    let headerRow = cols
+      .map(col => `<th>${col}</th>`)
+      .join("");
+
+      console.log("headerRow"+headerRow);
+  
+    //map over array of json objs, for each row(obj) map over column values,
+    //and return a td with the value of that object for its column
+    //take that array of tds and join them
+    //then return a row of the tds
+    //finally join all the rows together
+    console.log("Row"+JSON.stringify(json));
+    let rows = json
+      .map(row => {
+        let tds = cols.map(col => `<td>${row[col]}</td>`).join("");
+        console.log("tds"+tds);
+  
+        return `<tr>${tds}</tr>`;
+        
+      })
+      .join("");
+  
+    //build the table
+    const table = `
+    <table class="table" border=0 width=1111>
+      <thead class="thead-light">
+        <th>${headerRow}</th>
+        </thead>
+      <tbody>
+        ${rows}
+      <tbody>
+    <table>`;
+  
+    return table;
+  }
+  
+  
+
+  
   render() {
     //console.log("ola categories "+ JSON.stringify(this.state.options));
    // alert("Oi"+this.state.options.dataLabels.enabled);
    
     return (
+     
       <div className="app">
         <div className="row">
+         <table>
+  <tr>
+  <th>
+
           <div className="mixed-chart">
             <Chart
               options={this.state.options}
@@ -194,10 +286,24 @@ constructor(props) {
               type="line"
               width="860"
             />
+            
           </div> 
-        </div>
-         <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)} >Ver Dados</button>
-         <button type="submit" className="btn btn-primary" onClick={this.stratifiedSoil.bind(this)} >Análise</button>
+          </th>
+    <th valign = "top">
+    <div id='output'>
+
+</div>
+    
+    </th>
+
+  </tr>
+  </table>
+  </div>
+
+         <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)}>Ver Dados</button>
+         <button type="submit" className="btn btn-primary" onClick={this.stratifiedSoil.bind(this)}>Análise</button>
+
+         
       </div>
 
     );
