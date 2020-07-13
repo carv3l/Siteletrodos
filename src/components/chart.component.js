@@ -218,50 +218,51 @@ constructor(props) {
 
   }
 
-
   json2Table(json) { //https://dev.to/boxofcereal/how-to-generate-a-table-from-json-data-with-es6-methods-2eel
-    let columns = Object.keys(json[0]);
-
+    let columns= Object.keys(json[0]);
+    console.log("headerRow"+JSON.stringify(json[0]));
     //console.log("cols"+cols[index]);
     //Mostrar só os dados importantes
     let cols = []; 
     for (let index = 1; index < columns.length-1; index++) {
       cols.push(columns[index]);
     }
+
+   // console.log("headerRow"+cols);
   
     //Map over columns, make headers,join into string
     let headerRow = cols
       .map(col => `<th>${col}</th>`)
       .join("");
 
-      console.log("headerRow"+headerRow);
+      //console.log("headerRow"+headerRow.length);
   
     //map over array of json objs, for each row(obj) map over column values,
     //and return a td with the value of that object for its column
     //take that array of tds and join them
     //then return a row of the tds
     //finally join all the rows together
-    console.log("Row"+JSON.stringify(json));
-    let rows = json
-      .map(row => {
+    //console.log("Row"+JSON.stringify(json));
+    let rows = json.map(row => {
         let tds = cols.map(col => `<td>${row[col]}</td>`).join("");
+        console.log("Row"+JSON.stringify(row));
         console.log("tds"+tds);
-  
         return `<tr>${tds}</tr>`;
         
       })
       .join("");
+
   
-    //build the table
-    const table = `
-    <table class="table" border=0 width=1111>
-      <thead class="thead-light">
-        <th>${headerRow}</th>
-        </thead>
-      <tbody>
-        ${rows}
-      <tbody>
-    <table>`;
+     //build the table
+     const table = `
+     <table class="table">
+       <thead class="thead-light">
+         <tr>${headerRow}</tr>
+       <thead class="thead-light">
+       <tbody>
+         ${rows}
+       <tbody>
+     <table>`;
   
     return table;
   }
@@ -292,9 +293,7 @@ constructor(props) {
           </div> 
           </th>
     <th valign = "top">
-    <div id='output'>
-
-</div>
+    
     
     </th>
 
@@ -304,9 +303,11 @@ constructor(props) {
 
          <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)}>Ver Dados</button>
          <button type="submit" className="btn btn-primary" onClick={this.stratifiedSoil.bind(this)}>Análise</button>
+      
+      <div id='output'>
 
-         
-      </div>
+</div>
+</div>
 
     );
   }
