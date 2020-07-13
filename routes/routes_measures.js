@@ -31,6 +31,16 @@ router.get('/', function (req, res) {
   });
 
 
+
+  router.route('/:rsolo').get((req, res) => {
+    Measure.findById(req.params.r_solo)
+      .then(measure => res.json(measure))
+      .catch(err => res.status(400).json('Error: ' + err));
+      console.log("Reaching this");
+  }
+  );
+
+
   router.route('/:id').delete((req, res) => {
     Measure.findByIdAndDelete(req.params.id)
       .then(() => res.json('Medida Apagada.'))
