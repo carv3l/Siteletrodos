@@ -199,12 +199,14 @@ constructor(props) {
     array_media= [];
     array_nmedidas = [];
     array_rsolo = [];
+    measures_to_store =[];
   }
 
   exerciseList() {
     console.log("measu:",measures_to_store);
     var output = document.getElementById('output');
     output.innerHTML = this.json2Table(measures_to_store);
+    this.reset();
     /* if(measures_to_store != 0){
  
     return measures_to_store.map(current => {
