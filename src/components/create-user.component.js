@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 var operations = require('./Operations');
 
 
-var uri_get ="http://localhost:8080/soil/";
-var uri_post_measure="http://localhost:8080/measures/add_measure"
-//var uri_get ="https://eletrodos.herokuapp.com/soil/";
-
+//var uri_get ="http://localhost:8080/soil/";
+//var uri_post_measure="http://localhost:8080/measures/add_measure";
+var uri_get ="https://eletrodos.herokuapp.com/soil/";
+var uri_post_measure="https://eletrodos.herokuapp.com/add_measure";
 
 
 export default class CreateUser extends Component {

@@ -6,8 +6,8 @@ import axios from 'axios';
 
 
 
-var uri_post ="http://localhost:8080/soil/add";
-//var uri_post ="https://eletrodos.herokuapp.com/soil/add";
+//var uri_post ="http://localhost:8080/soil/add";
+var uri_post ="https://eletrodos.herokuapp.com/soil/add";
 
 export default class CreateExercise extends Component {
   constructor(props) {
