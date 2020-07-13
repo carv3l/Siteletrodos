@@ -51,6 +51,10 @@ export default class ExercisesList extends Component {
     })
   }
 
+
+
+  
+
   exerciseList() {
 
     return this.state.eletrodos.map(currentexercise => {
