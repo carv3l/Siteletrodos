@@ -146,7 +146,8 @@ constructor(props) {
     })
     //this.setState({ options: this.state.options})
     //this.forceUpdate();
-    this.props.history.push('./')
+    this.props.history.push('./table');
+    this.props.history.push('./chart');
   }
   
   //componentDidUpdate(){
