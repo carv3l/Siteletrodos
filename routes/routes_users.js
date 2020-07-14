@@ -12,10 +12,12 @@ router.get('/', function (req, res) {
 
   router.route('/add_user').post((req, res) => {
 
+   
     const mail = req.body.mail;
     const password = req.body.password;
     const type= req.body.type;
 
+   
   
     const newuser = new User({
         mail,
@@ -24,7 +26,7 @@ router.get('/', function (req, res) {
     });
   
     newuser.save()
-      .then(() => res.json('User Adicionada!'))
+      .then(() => res.json('User Adicionado!'))
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
