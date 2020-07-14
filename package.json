@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-export-default-from": "^7.10.4"
+    "@babel/plugin-proposal-export-default-from": "^7.10.4",
+    "css-loader": "^3.6.0"
   }
 }
