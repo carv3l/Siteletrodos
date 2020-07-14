@@ -18,7 +18,7 @@ export default class Login extends Component {
     this.onChangeMail = this.onChangeMail.bind(this);
     this.onChangepassword = this.onChangepassword.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.setRedirect = this.setRedirect.bind();
+    this.setRedirect = this.setRedirect.bind(this);
  
     this.state = {
       mail:'',
@@ -80,9 +80,11 @@ export default class Login extends Component {
       
 
   }
-  setRedirect(){
-    return <Redirect to='/SignIn' />
-  }
+  setRedirect(e){
+    e.preventDefault();
+    this.props.history.push('./SignIn');
+    
+ }
   
   render() {
     return (
@@ -91,13 +93,13 @@ export default class Login extends Component {
         <form>
           <div className="form-group"> 
             <label>Mail </label>
-            <input required type="text" className="form-control" value={this.state.mail} onChange={this.onChangeMail} required/>
+            <input required type="mail" className="form-control" value={this.state.mail} onChange={this.onChangeMail} required/>
             <label>Palavra Passe</label>
             <input required type="password" className="form-control" value={this.state.password} onChange={this.onChangepassword} required/>
           </div>
           <div className="form-group">
           <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)} >Login</button>
-          <button type="submit" onClick={this.setRedirect.bind(this)}>Sign up</button>
+          <button type="submit" onClick={this.setRedirect.bind(this)}>Registar</button>
           </div>
         </form>
       </div>

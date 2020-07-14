@@ -10,7 +10,7 @@ var uri_post_user="http://localhost:8080/users/add_user";
 //var uri_post_user="https://eletrodos.herokuapp.com/add_measure";
 
 
-export default class Login extends Component {
+export default class SignIn extends Component {
   constructor(props) {
     super(props);
 
@@ -64,11 +64,11 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        <h3>Login</h3>
+        <h3>Registar-se</h3>
         <form>
           <div className="form-group"> 
             <label>Mail </label>
-            <input required type="text" className="form-control" value={this.state.mail} onChange={this.onChangeMail} required/>
+            <input required type="mail" className="form-control" value={this.state.mail} onChange={this.onChangeMail} required/>
             <label>Palavra Passe</label>
             <input required type="password" className="form-control" value={this.state.password} onChange={this.onChangepassword} required/>
           </div>
