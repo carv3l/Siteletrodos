@@ -7,4 +7,10 @@
       margin: 0 auto;
       max-width: 320px;
     }
+    .button_register {
+      background-color:#e3e3e3; /* Green */
+      border: none;
+      color: gray;
+      display: inline-block;
+    }
   }
