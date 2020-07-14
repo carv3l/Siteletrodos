@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
+import '../Login.css';
+import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 var operations = require('./Operations');
 
 
@@ -41,6 +43,10 @@ export default class SignIn extends Component {
       password: e.target.value
     })
   }
+  validateForm() {
+    return this.mail.length > 0 && this.password.length > 0;
+  }
+
 
   onSubmit(e) {
     e.preventDefault();
@@ -62,22 +68,37 @@ export default class SignIn extends Component {
 
   }
   render() {
-    return (
-      <div>
-        <h3>Registar-se</h3>
-        <form>
-          <div className="form-group"> 
-            <label>Mail </label>
-            <input required type="mail" className="form-control" value={this.state.mail} onChange={this.onChangeMail} required/>
-            <label>Palavra Passe</label>
-            <input required type="password" className="form-control" value={this.state.password} onChange={this.onChangepassword} required/>
-          </div>
-          <div className="form-group">
-          <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)} >Sign In</button>
-          </div>
+      return (
+        <div>
+          <h3>Login</h3>
+          
+          <div className="Login">
+        <form onSubmit={this.onSubmit}>
+          <FormGroup controlId="email" bsSize="large">
+          <FormLabel>Mail</FormLabel>
+            <FormControl
+              autoFocus
+              type="email"
+              value={this.state.mail}
+              onChange={this.onChangeMail}
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+          <FormLabel>Password</FormLabel>
+            <FormControl
+              value={this.state.password}
+              onChange={this.onChangepassword}
+              type="password"
+            />
+          </FormGroup>
+          <Button block bsSize="large" disabled={!this.validateForm} type="submit">
+           Registar
+          </Button>
+          
         </form>
       </div>
-    )
+        </div>
+      )
   }
 }
 

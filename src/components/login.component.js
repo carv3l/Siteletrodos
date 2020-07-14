@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import { Redirect } from 'react-router-dom'
+import '../Login.css';
+import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 var operations = require('./Operations');
+
 
 
 //var uri_get ="http://localhost:8080/soil/";
@@ -53,6 +56,10 @@ export default class Login extends Component {
                // alert("P: "+JSON.stringify(dados)+"\n");
 
   }
+  validateForm() {
+    return this.mail.length > 0 && this.password.length > 0;
+  }
+
 
   handleSubmit(e) {
     e.preventDefault();
@@ -90,18 +97,34 @@ export default class Login extends Component {
     return (
       <div>
         <h3>Login</h3>
-        <form>
-          <div className="form-group"> 
-            <label>Mail </label>
-            <input required type="mail" className="form-control" value={this.state.mail} onChange={this.onChangeMail} required/>
-            <label>Palavra Passe</label>
-            <input required type="password" className="form-control" value={this.state.password} onChange={this.onChangepassword} required/>
-          </div>
-          <div className="form-group">
-          <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)} >Login</button>
-          <button type="submit" onClick={this.setRedirect.bind(this)}>Registar</button>
-          </div>
-        </form>
+        
+        <div className="Login">
+      <form onSubmit={this.onSubmit}>
+        <FormGroup controlId="email" bsSize="large">
+        <FormLabel>Mail</FormLabel>
+          <FormControl
+            autoFocus
+            type="email"
+            value={this.state.mail}
+            onChange={this.onChangeMail}
+          />
+        </FormGroup>
+        <FormGroup controlId="password" bsSize="large">
+        <FormLabel>Password</FormLabel>
+          <FormControl
+            value={this.state.password}
+            onChange={this.onChangepassword}
+            type="password"
+          />
+        </FormGroup>
+        <Button block bsSize="large" disabled={!this.validateForm} type="submit">
+          Login
+        </Button>
+        <Button block bsSize="large" className="btn" onClick={this.setRedirect} type="submit">
+          Registar
+        </Button>
+      </form>
+    </div>
       </div>
     )
   }
