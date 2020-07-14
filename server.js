@@ -9,7 +9,7 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'build')));
+//app.use(express.static(path.join(__dirname, 'build')));
 
 const port = process.env.PORT || 8080;
 app.use(cors());
@@ -20,7 +20,7 @@ const uri = 'mongodb+srv://root:toor@cluster0-6wgtv.gcp.mongodb.net/Eletrodos?re
 
 
 //app.use(bodyParser.json());
-//app.use(express.json());
+app.use(express.json(path.join(__dirname, 'build')));
 //
 mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true});
 var db = mongoose.connection;
