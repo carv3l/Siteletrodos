@@ -4,10 +4,10 @@ import axios from 'axios';
 
 
 
-var uri_get ="http://localhost:8080/measures/";
+//var uri_get ="http://localhost:8080/measures/";
 
 
-//var uri_get ="https://eletrodos.herokuapp.com/measures/";
+var uri_get ="https://eletrodos.herokuapp.com/measures/";
 
 const Measures = medidas => (
   <tr>

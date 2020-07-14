@@ -7,8 +7,8 @@ import { Redirect } from 'react-router-dom'
 var operations = require('./Operations');
 
 
-//var uri_get ="https://eletrodos.herokuapp.com/measures/";
-var uri_get ="http://localhost:8080/measures/";
+var uri_get ="https://eletrodos.herokuapp.com/measures/";
+//var uri_get ="http://localhost:8080/measures/";
 var array_media = [];
 var larray_media= [];
 var array_nmedidas = [];

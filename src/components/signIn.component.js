@@ -7,9 +7,9 @@ var operations = require('./Operations');
 
 
 //var uri_get ="http://localhost:8080/soil/";
-var uri_post_user="http://localhost:8080/users/add_user";
-//var uri_get ="https://eletrodos.herokuapp.com/soil/";
-//var uri_post_user="https://eletrodos.herokuapp.com/add_measure";
+//var uri_post_user="http://localhost:8080/users/add_user";
+var uri_get ="https://eletrodos.herokuapp.com/soil/";
+var uri_post_user="https://eletrodos.herokuapp.com/add_user";
 
 
 export default class SignIn extends Component {
