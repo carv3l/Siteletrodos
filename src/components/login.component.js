@@ -120,7 +120,7 @@ export default class Login extends Component {
         <Button block bsSize="large" disabled={!this.validateForm} type="submit">
           Login
         </Button>
-        <Button block bsSize="large" className="btn" onClick={this.setRedirect} type="submit">
+        <Button block bsSize="large" className="button_register" onClick={this.setRedirect} type="submit">
           Registar
         </Button>
       </form>
