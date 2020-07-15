@@ -41,6 +41,7 @@ export default class ExercisesList extends Component {
       .catch((error) => {
         console.log(error);
       })
+      console.log("Measures:"+this.state.measure);
   }
 
   deleteExercise(id) {

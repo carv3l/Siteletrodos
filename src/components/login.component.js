@@ -8,11 +8,10 @@ var operations = require('./Operations');
 
 
 
-//var uri_get ="http://localhost:8080/soil/";
-var uri_post_measure="http://localhost:8080/users/add_user";
+var uri_get ="http://localhost:8080/users/";
+//var uri_post_measure="http://localhost:8080/users/add_user";
 //var uri_get ="https://eletrodos.herokuapp.com/soil/";
 //var uri_post_measure="https://eletrodos.herokuapp.com/add_measure";
-
 
 export default class Login extends Component {
   constructor(props) {
@@ -23,19 +22,27 @@ export default class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.setRedirect = this.setRedirect.bind(this);
  
+    this.state = {user_data: []};
+
     this.state = {
       mail:'',
       password:'',
-      redirect: false
+      type: ''
     }
-
-    
   }
 
   
 
   componentDidMount() {
-    }
+    axios.get(uri_get)
+    .then(response => {
+      this.setState({ user_data: response.data })
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    console.log(this.state.user_data);
+      }
     onChangeMail(e) {
     this.setState({
       mail: e.target.value
@@ -48,12 +55,24 @@ export default class Login extends Component {
   }
 
   onSubmit(e) {
+    var user = this.state.user_data;
     e.preventDefault();
     const dados = {
     mail: this.state.mail,
      password: this.state.password
     }
-               // alert("P: "+JSON.stringify(dados)+"\n");
+
+
+    for (let i = 0; i < this.state.user_data.length; i++) {
+
+      if (dados.mail === user[i]) {
+        alert("P: "+JSON.stringify(dados)+"\n");
+      }
+      
+    }
+    
+
+
 
   }
   validateForm() {
@@ -79,11 +98,6 @@ export default class Login extends Component {
 
     console.log(measure);
 
-    axios.post(uri_post_measure, measure)
-      .then(res => console.log(res.data))
-      .catch((error) => {
-               console.log(error);
-             });
       
 
   }
