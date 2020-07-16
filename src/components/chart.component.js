@@ -68,6 +68,8 @@ constructor(props) {
   
 //async e await para esperar que haja response do axios
   async componentDidMount() {
+
+    alert("Session Storage  \n"+ sessionStorage.SessionName);
     await axios.get(uri_get)
         .then(response => {
           if (response.data.length > 0) {

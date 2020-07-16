@@ -41,7 +41,7 @@ export default class Login extends Component {
     .catch((error) => {
       console.log(error);
     })
-    console.log(this.state.user_data);
+    
       }
     onChangeMail(e) {
     this.setState({
@@ -54,26 +54,34 @@ export default class Login extends Component {
     })
   }
 
+
   onSubmit(e) {
     var user = this.state.user_data;
+    var validation = false;
     e.preventDefault();
     const dados = {
     mail: this.state.mail,
      password: this.state.password
     }
+    console.log(user[1]['mail']);
 
-
-    for (let i = 0; i < this.state.user_data.length; i++) {
-
-      if (dados.mail === user[i]) {
-        alert("P: "+JSON.stringify(dados)+"\n");
+    for (let i = 0; i < user.length; i++) {
+      if (dados.mail == user[i]['mail'] && dados.password ==user[i]['password']) {
+        validation = true;
       }
-      
     }
-    
+    if(validation)
+    {
+      alert("Bem Vindo: \n"+dados.mail);
+    }else{
+      alert("UTILIZADOR NÃO DETECTADO \n");
+    }
 
+    //sessionStorage.SessionName = dados.mail;
+    //sessionStorage.setItem("SessionName","SessionData");
+    sessionStorage.setItem(dados.mail ,dados.password, dados.type);
 
-
+    alert("Session Storage  \n"+ JSON.stringify(sessionStorage));
   }
   validateForm() {
     return this.mail.length > 0 && this.password.length > 0;
