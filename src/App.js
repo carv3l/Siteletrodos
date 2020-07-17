@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 
 import Navbar from "./components/navbar.component"
 import Soils from "./components/soils.component";
-import EditExercise from "./components/edit-exercise.component";
+import EditUser from "./components/edit_user.component";
 import AddSoils from "./components/addsoil.component";
 import Main from "./components/create-user.component";
 import Table from "./components/measures.component";
@@ -20,13 +20,14 @@ function App() {
       <Navbar />
       <br/>
       <Route path="/" exact component={Main}/>
-      <Route path="/edit/:id" component={EditExercise} />
+      <Route path="/edit/:id" component={EditUser} />
       <Route path="/AddSoil" component={AddSoils} />
       <Route path="/soils" component={Soils} />
       <Route path="/table" component={Table} />
       <Route path="/chart" component={Graph} />
       <Route path="/Login" component={Login} />
       <Route path="/SignIn" component={SignIn} />
+      <Route path="/Administration" component={ControlPanel} />
       </div>
     </Router>
   );
