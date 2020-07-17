@@ -36,6 +36,7 @@ export default class Login extends Component {
   componentDidMount() {
     axios.get(uri_get)
     .then(response => {
+      console.log("Data"+JSON.stringify(response.data))
       this.setState({ user_data: response.data })
     })
     .catch((error) => {
@@ -55,33 +56,43 @@ export default class Login extends Component {
   }
 
 
-  onSubmit(e) {
+    onSubmit(e) {
     var user = this.state.user_data;
     var validation = false;
+    var item_n = 0;
     e.preventDefault();
     const dados = {
     mail: this.state.mail,
-     password: this.state.password
+     password: this.state.password,
+     type: this.state.type
     }
-    console.log(user[1]['mail']);
+    //console.log(user[1]['mail']);
 
     for (let i = 0; i < user.length; i++) {
       if (dados.mail == user[i]['mail'] && dados.password ==user[i]['password']) {
         validation = true;
+        item_n = i;
       }
     }
     if(validation)
     {
       alert("Bem Vindo: \n"+dados.mail);
+      //alert("Sorage  \n"+ user[item_n]['type']);
+      dados.type = user[item_n]['type'];
+
     }else{
       alert("UTILIZADOR NÃO DETECTADO \n");
     }
 
     //sessionStorage.SessionName = dados.mail;
-    //sessionStorage.setItem("SessionName","SessionData");
-    sessionStorage.setItem(dados.mail ,dados.password, dados.type);
+    sessionStorage.setItem("mail",dados.mail); // para se obter a password : sessionStorage[Object.keys(sessionStorage)[1]
+    sessionStorage.setItem("type",dados.type);
+    console.log("Dados: "+ JSON.stringify(dados));
+    console.log("State: "+ this.state.type);
 
-    alert("Session Storage  \n"+ JSON.stringify(sessionStorage));
+   // document.getElementById('session_user').innerHTML = "Bem Vindo " + sessionStorage[Object.keys(sessionStorage)];
+    alert("Session Storage  \n"+ sessionStorage.type);
+   //alert("Session Storage  \n"+  sessionStorage[Object.keys(sessionStorage)[0]]);
   }
   validateForm() {
     return this.mail.length > 0 && this.password.length > 0;
