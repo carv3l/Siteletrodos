@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 
+
 export default class Navbar extends Component {
 
   render() {
+    
     return (
       <nav className="navbar navbar-inverse bg-inverse navbar-expand-lg">
         <div className="container-fluid">
@@ -29,11 +31,13 @@ export default class Navbar extends Component {
           <li className="navbar-item">
           <Link to="/Login" className="nav-link">Login</Link>
           </li>
+          <li className="navbar-item">
+          <Link to="/Administration" className="nav-link">Administration</Link>
+          </li>
         </ul>
-        <li className="navbar-item">
-        <label id="session_user">OI</label>
-        </li>
-        
+        <ul class="navbar-nav nav ml-auto">
+        <label id="session_user"></label>
+        </ul>
         </div>
         </div>
       </nav> 
