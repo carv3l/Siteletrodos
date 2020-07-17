@@ -11,10 +11,9 @@ var uri_get ="http://localhost:8080/users/";
 
 const User = users => (
   <tr>
-    <td>{users.utilizador.espacamento}</td>
-    <td>{users.utilizador.r_medido}</td>
-    <td>{users.utilizador.r_solo}</td>
-    <td>{users.utilizador.nota}</td>
+    <td>{users.utilizador.mail}</td>
+    <td>{users.utilizador.password}</td>
+    <td>{users.utilizador.type}</td>
 
     <td>
       <Link to={"/edit/"+users.utilizador._id}>edit</Link> | <a href="#" onClick={() => { users.deleteExercise(users.utilizador._id) }}>delete</a>
@@ -56,7 +55,7 @@ export default class ExercisesList extends Component {
   exerciseList() {
 
     return this.state.utilizador.map(currentexercise => {
-      return <User utilizado={currentexercise} deleteExercise={this.deleteExercise} key={currentexercise._id}/>;
+      return <User utilizador={currentexercise} deleteExercise={this.deleteExercise} key={currentexercise._id}/>;
 
     })
   }
@@ -64,7 +63,7 @@ export default class ExercisesList extends Component {
   render() {
     return (
       <div>
-        <h3>Logged Exercises</h3>
+        <h3>Utilizadores</h3>
         <table className="table">
           <thead className="thead-light">
             <tr>
