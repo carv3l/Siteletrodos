@@ -2,11 +2,9 @@ const router = require('express').Router();
 let User = require('../models/modelUser');
 
 router.get('/', function (req, res) {
-  console.log("Reached before user find");
       User.find()
     .then(user => res.json(user))
     .catch(err => res.status(400).json('Erro: ' + err));
-    console.log("user");
 });
 
 
@@ -36,7 +34,6 @@ router.get('/', function (req, res) {
     User.findById(req.params.id)
       .then(user => res.json(user))
       .catch(err => res.status(400).json('Error: ' + err));
-      console.log("Reaching this");
   }
   );
 
