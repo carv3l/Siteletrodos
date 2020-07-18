@@ -68,8 +68,6 @@ constructor(props) {
   
 //async e await para esperar que haja response do axios
   async componentDidMount() {
-
-    alert("Session Storage  \n"+ sessionStorage.SessionName);
     await axios.get(uri_get)
         .then(response => {
           if (response.data.length > 0) {
@@ -139,6 +137,8 @@ constructor(props) {
 
   async onSubmit(e) {
     //this.setState(initialState)
+
+    
     vtoggle=!vtoggle;
 
     this.setState(prevState => {
@@ -148,8 +148,9 @@ constructor(props) {
     })
     //this.setState({ options: this.state.options})
     //this.forceUpdate();
-    this.props.history.push('./table');
-    this.props.history.push('./chart');
+    //this.props.history.push('./table');
+    //this.props.history.push('./chart');
+    window.location = '/chart';
   }
   
   //componentDidUpdate(){

@@ -87,16 +87,25 @@ export default class Login extends Component {
     //sessionStorage.SessionName = dados.mail;
     sessionStorage.setItem("mail",dados.mail); // para se obter a password : sessionStorage[Object.keys(sessionStorage)[1]
     sessionStorage.setItem("type",dados.type);
-    console.log("Dados: "+ JSON.stringify(dados));
-    console.log("State: "+ this.state.type);
+    //console.log("Dados: "+ JSON.stringify(dados));
+    //console.log("State: "+ this.state.type);
 
-   // document.getElementById('session_user').innerHTML = "Bem Vindo " + sessionStorage[Object.keys(sessionStorage)];
-    alert("Session Storage  \n"+ sessionStorage.type);
+   document.getElementById('session_user').innerHTML = "Bem Vindo " + sessionStorage.mail;
+    //alert("Session Storage  \n"+ sessionStorage.type);
    //alert("Session Storage  \n"+  sessionStorage[Object.keys(sessionStorage)[0]]);
   }
   validateForm() {
     return this.mail.length > 0 && this.password.length > 0;
   }
+
+  verifiyifadmin() {
+    if (sessionStorage.type === 0){
+
+
+      
+    }
+  }
+
 
 
   handleSubmit(e) {
