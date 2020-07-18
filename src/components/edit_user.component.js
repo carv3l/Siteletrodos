@@ -3,6 +3,7 @@ import axios from 'axios';
 
 
 var uri_get ="http://localhost:8080/users/";
+var uri_update ="http://localhost:8080/users/update/";
 
 export default class EditExercise extends Component {
   constructor(props) {
@@ -16,8 +17,7 @@ export default class EditExercise extends Component {
     this.state = {
       mail: '',
       password: '',
-      type: '',
-      users: []
+      type: ''
     }
   }
 
@@ -29,24 +29,16 @@ export default class EditExercise extends Component {
         this.setState({
           mail: response.data.mail,
           password: response.data.password,
-          tpye: response.data.tpye
+          type: response.data.type
         })   
       })
       .catch(function (error) {
         console.log(error);
       })
 
-    axios.get('http://localhost:8080/users/')
-      .then(response => {
-        if (response.data.length > 0) {
-          this.setState({
-            users: response.data.map(user => user.username),
-          })
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+      document.getElementById('textbox_mail').value = this.state.mail;
+      document.getElementById('textbox_password').value = this.state.password;
+      document.getElementById('textbox_type').value = this.state.type;
 
   }
 
@@ -64,7 +56,7 @@ export default class EditExercise extends Component {
 
   onChangeType(e) {
     this.setState({
-      tpye: e.target.value
+      type: e.target.value
     })
   }
 
@@ -74,15 +66,15 @@ export default class EditExercise extends Component {
     const user_data = {
       mail: this.state.mail,
       password: this.state.password,
-      type: this.state.tpye
+      type: this.state.type
     }
 
-    console.log(user_data);
+    console.log(JSON.stringify(user_data));
 
-    axios.post('http://localhost:5000/users/update/' + this.props.match.params.id, user_data)
+    axios.post(uri_update + this.props.match.params.id, user_data)
       .then(res => console.log(res.data));
 
-    window.location = '/';
+    window.location = '/Administration';
   }
 
   render() {
@@ -92,28 +84,28 @@ export default class EditExercise extends Component {
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Mail: </label>
-          <select ref="userInput"
+          <input id="textbox_mail" type="text"
               required
               className="form-control"
-              value={this.state.username}
-              onChange={this.onChangeMail}>
-          </select>
+              value={this.state.mail}
+              onChange={this.onChangeMail}
+              />
         </div>
         <div className="form-group"> 
           <label>Password: </label>
-          <input  type="text"
+          <input id="textbox_password" type="text"
               required
               className="form-control"
-              value={this.state.description}
+              value={this.state.password}
               onChange={this.onChangePassword}
               />
         </div>
-        <div className="form-group">
+        <div  className="form-group">
           <label>Type: </label>
-          <input 
+          <input id="textbox_type"
               type="text" 
               className="form-control"
-              value={this.state.duration}
+              value={this.state.type}
               onChange={this.onChangeType}
               />
         </div>
